@@ -94,4 +94,13 @@ public class LoginServiceImpl implements LoginService{
 	public Set<String> getPermissions(String userName) {
 		return dao.getPermissions(userName);
 	}
+
+
+
+	public 	 Integer getUserByEmail(String email){
+
+		return dao.getUserByEmail(email);
+
+
+	}
 }

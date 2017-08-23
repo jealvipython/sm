@@ -20,7 +20,7 @@
     <util:properties id="APP_PROP" location="classpath:family.properties" local-override="true"/> -->
 	
 	<!-- 使用Annotation自动注册Bean，解决事物失效问题：在主容器中不扫描@Controller注解，在SpringMvc中只扫描@Controller注解。  -->
-	<context:component-scan base-package="com.family.sweety.modules"><!-- base-package 如果多个，用“,”分隔 -->
+	<context:component-scan base-package="com.family.sweety"><!-- base-package 如果多个，用“,”分隔 -->
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	
@@ -35,7 +35,7 @@
     <!-- 扫描basePackage下所有以@MyBatisDao注解的接口 -->
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-        <property name="basePackage" value="com.family.sweety.modules"/>
+        <property name="basePackage" value="com.family.sweety"/>
         <property name="annotationClass" value="com.family.sweety.common.utils.MyBatisDao"/>
     </bean>
     

@@ -9,11 +9,11 @@ import com.family.sweety.modules.Login.entity.User;
 public interface LoginDao {
 
 	
-	public void register(User user);
-	public User  login(User user);
+	 void register(User user);
+	 User  login(User user);
 	
 	
-	public User  findUserByName(String username);
+	 User  findUserByName(String username);
 	
 	
 	/**
@@ -21,19 +21,21 @@ public interface LoginDao {
 	 * @param userName
 	 * @return
 	 */
-	public User getByUserName(String userName);
+	 User getByUserName(String userName);
 	
 	/**
 	 * 通过用户名查询角色信息
 	 * @param userName
 	 * @return
 	 */
-	public Set<String> getRoles(String userName);
+	 Set<String> getRoles(String userName);
 	
 	/**
 	 * 通过用户名查询权限信息
 	 * @param userName
 	 * @return
 	 */
-	public Set<String> getPermissions(String userName);
+	 Set<String> getPermissions(String userName);
+
+	Integer getUserByEmail(String email);
 }

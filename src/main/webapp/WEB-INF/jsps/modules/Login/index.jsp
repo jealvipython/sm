@@ -5,9 +5,9 @@
     <meta charset="utf-8"/>
     <title>欢迎来到SweetyFamily</title>
     <link rel="stylesheet" href="${smStatic}/css/sysindex/styles.css"/>
-    <link rel="stylesheet" href="${smStatic}/css/utils/sweetAlert/sweetalert.css" />
-    <script type="text/javascript" src="${smStatic}/js/lib/sweetAlert/sweetalert-dev.js"> </script>
-    <script type="text/javascript" src="${smStatic}/js/lib/sweetAlert/sweetalert.min.js"> </script>
+    <link rel="stylesheet" href="${smStatic}/css/utils/sweetAlert/sweetalert.css"/>
+    <script type="text/javascript" src="${smStatic}/js/lib/sweetAlert/sweetalert-dev.js"></script>
+    <script type="text/javascript" src="${smStatic}/js/lib/sweetAlert/sweetalert.min.js"></script>
 
 </head>
 <body>
@@ -117,84 +117,166 @@
 
 
 
-                swal({
-                        title: "注册暂未发放",
-                        text: "现在不允许注册, 你不要想搞个大新闻",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "偷偷注册",
-                        cancelButtonText: "算了还是撤吧",
-                        closeOnConfirm: false,
-                        closeOnCancel: false
-                    },
-                    function (isConfirm) {
-                        if (isConfirm) {
+
+                    swal({
+                            title: "注册暂未发放",
+                            text: "现在不允许注册, 你不要想搞个大新闻",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "偷偷注册",
+                            cancelButtonText: "算了还是撤吧",
+                            closeOnConfirm: false,
+                            closeOnCancel: false
+                        },
+                        function (isConfirm) {
+                            if (isConfirm) {
 
 
-                            swal({
-                                    title: "留下邮箱",
-                                    text: "别被别人看到你的邮箱,偷偷留下来",
-                                    type: "input",
-                                    showCancelButton: true,
-                                    closeOnConfirm: false,
-                                    animation: "slide-from-left",
-                                    inputPlaceholder: "啦啦啦啦啦~~"
-                                },
-                                function (inputValue) {
-                                    if (inputValue === false) return false;
+                                swal({
+                                        title: "留下邮箱",
+                                        text: "别被别人看到你的邮箱,偷偷留下来",
+                                        type: "input",
+                                        showCancelButton: true,
+                                        closeOnConfirm: false,
+                                        animation: "slide-from-left",
+                                        inputPlaceholder: "啦啦啦啦啦~~"
+                                    },
+                                    function (inputValue) {
+                                        if (inputValue === false) return false;
 
-                                    if (inputValue === "") {
-                                        swal.showInputError("你都不写邮箱, 怎么注册啊~");
-                                        return false
-                                    }
+                                        if (inputValue === "") {
+                                            swal.showInputError("你都不写邮箱, 怎么注册啊~");
+                                            return false
+                                        }
 
-                                    var re = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
+                                        var re = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
 
-                                    if (re.test(inputValue)) {
-                                        swal("Nice!", "客管您的邮箱是 :" + inputValue+ " 快去邮箱确认注册吧");
-
-                                        $.ajax({
-                                            url:"/api/mailSend.php/"+inputValue,
-                                            type: "post",
-                                            data: {user_email:inputValue,username:username,password:password,timestamp:timestamp},
-                                            beforeSend:function () {
-
-                                            },
-                                            success:function (data) {
-
-                                                if(data==0){
-
-                                                   setTimeout('window.location.href="https://www.baidu.com"',2000) ;
-                                                }
-
-                                            }
+                                        if (re.test(inputValue)) {
 
 
 
 
-                                        })
+
+                                                $.ajax({
+                                                    url: "/api/mailSend.php/" + inputValue,
+                                                    type: "post",
+                                                    async: false,
+                                                    data: {
+                                                        user_email: inputValue,
+                                                        username: username,
+                                                        password: password,
+                                                        timestamp: timestamp
+                                                    },
+                                                    beforeSend: function () {
+
+                                                    },
+                                                    success: function (data) {
+
+
+                                                        if(201==data){
+
+                                                            swal("不好意思!", "用户名已存在", "error");
+                                                            return  ;
+                                                        }
+                                                        if(401==data){
+
+                                                            swal("不好意思!", "邮箱已存在", "error");
+                                                            return  ;
+                                                        }
+
+                                                        if (data == 0) {
+                                                            swal("Nice!", "客管您的邮箱是 :" + inputValue + " 快去邮箱确认注册吧");
+                                                            setTimeout('window.location.href="https://www.baidu.com"', 2000);
+                                                        }
+
+                                                    }
+
+
+                                                })
 
 
 
-                                    } else {
-                                        swal.showInputError("你确定你写对了吗?");
-                                    }
+
+                                        } else {
+                                            swal.showInputError("你确定你写对了吗?");
+                                        }
 
 
-                                });
+                                    });
 
 
-
-                        } else {
-                            swal("Cancelled", "滚吧", "error");
-                        }
-                    });
+                            } else {
+                                swal("Cancelled", "滚吧", "error");
+                            }
+                        });
 
 
             }
 
         }
+    }
+
+
+    function check110(value, dif) {
+
+        if (dif == 1) {
+
+            if ("" != value && null != value && undefined != value) {
+                $.ajax({
+                    url: "/sys/checkIsIllegal.php",
+                    type: "post",
+                    data: {userName: value},
+                    async: false,
+                    success: function (data) {
+                        if (data != 1) {
+
+
+                            swal("不好意思!", "用户名已存在", "error");
+                            return false;
+                        } else {
+
+                            return "1";
+                        }
+
+
+                    }
+
+
+                })
+
+
+            }
+
+        } else {
+
+
+            if ("" != value && null != value && undefined != value) {
+                $.ajax({
+                    url: "/sys/checkIsIllegal.php",
+                    type: "post",
+                    data: {email: value},
+                    success: function (data) {
+
+                        if (3 != data) {
+                            swal("不好意思!", "你的邮箱已经注册", "error");
+                            return false;
+
+                        } else {
+
+                            return "1";
+                        }
+
+                    }
+
+
+                })
+
+
+            }
+        }
+
+
     }
 
 </script>

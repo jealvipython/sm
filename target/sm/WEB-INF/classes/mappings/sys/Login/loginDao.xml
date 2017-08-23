@@ -14,7 +14,7 @@ select id ,username,password from sm_sys_user where username = #{username} and p
 </select>
 
 <select id ="findUserByName" resultType="com.family.sweety.modules.Login.entity.User">
-select id,username,password from sm_sys_user where username = #{_parameter}
+select id,username,password from sm_sys_user where username = #{_parameter} ORDER BY  create_time ASC  limit 1
 </select>
 
 
@@ -35,5 +35,12 @@ select id,username,password from sm_sys_user where username = #{_parameter}
 	
 	<select id="getPermissions" parameterType="String" resultType="String">
 		select p.permissionName from sm_sys_user u,sm_sys_role r,sm_sys_permission p where u.roleId=r.id and p.roleId=r.id and u.userName=#{userName}
+	</select>
+
+
+	<select id="getUserByEmail" parameterType="String" resultType="int">
+
+		select count(1) from sm_sys_user where email =#{_parameter} ORDER BY  create_time ASC  limit 1
+
 	</select>
 </mapper>

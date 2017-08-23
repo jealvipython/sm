@@ -4,6 +4,8 @@ com\family\sweety\modules\ShiroDemo\CustomRealmDemo.class
 com\family\sweety\modules\novel\entity\Novel.class
 com\family\sweety\modules\Demo\TreadDemo\MyThreadPrinter2.class
 com\family\sweety\modules\programmer_url\dao\ProgrammerUrlDao.class
+com\family\sweety\common\utils\Log\LogEntity.class
+com\family\sweety\common\utils\Log\LogServiceImpl.class
 com\family\sweety\modules\ShiroDemo\CustomRealmDemo3.class
 com\family\sweety\modules\Demo\shiroTest.class
 com\family\sweety\modules\Login\dao\LoginDao.class
@@ -11,11 +13,15 @@ com\family\sweety\common\FilterUtils\LoginPostFilter.class
 com\family\sweety\modules\novel\service\NovelService.class
 com\family\sweety\common\utils\JedisUtil.class
 com\family\sweety\common\utils\BaseEntity.class
+com\family\sweety\common\utils\Log\LogService.class
 com\family\sweety\modules\Login\serviceImpl\LoginServiceImpl.class
 com\family\sweety\modules\programmer_url\entity\ProgrammerUrlEntity.class
 com\family\sweety\modules\ShiroDemo\ShiroJDBCDemo\ShiroJdbcDemo.class
+com\family\sweety\common\constantUtils\TableNameUtil.class
 com\family\sweety\common\utils\MailUtil.class
+com\family\sweety\common\constantUtils\BaseController.class
 com\family\sweety\modules\programmer_url\entity\ProgrammerUrlCategoryEntity.class
+com\family\sweety\common\utils\Log\LogDao.class
 com\family\sweety\common\utils\security\Base64Utils.class
 com\family\sweety\common\utils\UUIDUtils.class
 com\family\sweety\modules\ShiroDemo\ShiroRealmTest.class

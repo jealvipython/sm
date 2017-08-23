@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -82,6 +83,8 @@ public class LoginController {
     }
 
 
+
+
     @RequestMapping(value = "/index.php")
     public String index(Model model, HttpServletRequest request) {
         return "/modules/sysindex/sysindex";
@@ -102,19 +105,9 @@ public class LoginController {
     }
 
 
-    public static void main(String[] args) {
-
-       Jedis jedis  = JedisUtil.getJedis();
-
-       jedis.set("1","2");
 
 
-        System.out.println(jedis.get("1"));
 
 
-        JedisUtil.releaseResource(jedis);
-
-
-    }
 
 }
