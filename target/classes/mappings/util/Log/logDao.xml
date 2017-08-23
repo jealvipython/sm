@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.family.sweety.common.utils.Log.LogDao">
+
+
+<insert id="saveLogInfo" parameterType="com.family.sweety.common.utils.Log.LogEntity" useGeneratedKeys="true" keyProperty="id" keyColumn="id" >
+    INSERT  into sm_log (
+
+        sm_user_id,
+        sm_log_user_ip_address,
+        sm_log_user_create_time,
+        sm_log_op_type,
+        sm_log_business_table_name,
+        sm_log_is_flag,
+
+        sm_log_req_host_name
+
+    )VALUES (
+            #{userId},
+            #{userIpAddress},
+            #{createDateTime},
+            #{opType},
+            #{relatedTableName},
+            #{isFlag},
+        #{userHostName}
+
+
+
+
+    )
+
+
+
+
+
+</insert>
+</mapper>
