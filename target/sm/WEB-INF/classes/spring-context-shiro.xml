@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+	default-lazy-init="true">
+
+	<description>Shiro Configuration</description>
+
+    <!-- 加载配置属性文件 -->
+	<context:property-placeholder ignore-unresolvable="true" location="classpath:family.properties" />
+	<!-- 自定义Realm -->
+	<bean id="myRealm" class="com.family.sweety.modules.Login.Realm.LoginRealm"/>  
+	
+	<!-- 安全管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">  
+  	  <property name="realm" ref="myRealm"/>  
+	</bean>  
+	<!-- shiro过滤器 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+	<property name="securityManager" ref="securityManager"/>
+	<property name="loginUrl" value="/jsps/modules/Login/login.jsp"/>
+    <property name="successUrl" value="/jsps/modules/sysindex/sysindex.jsp"/>
+    <property name="unauthorizedUrl" value="/jsps/modules/unAuthorized/unauthorized"/> 
+    
+    
+    
+     <property name="filterChainDefinitions">
+        <value>
+            /static/** = anon
+         ${familyPath}/** =user
+			/api/** =anon
+        <!--   ${familyPath}/** =authc -->
+         <!--  ${familyPath}/sys/user = roles[admin],roles[user],roles[big_user]
+          ${familyPath}/sys/big_user =  roles[admin],roles[big_user] -->
+        
+        
+        </value>
+    </property>
+	</bean>
+	
+
+<!-- shiro注解支持 -->
+<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+    <property name="securityManager" ref="securityManager"/>
+</bean>
+</beans>
